@@ -1,4 +1,3 @@
-import { useUnit } from 'effector-react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import { forwardRef } from 'react'

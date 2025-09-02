@@ -8,6 +8,7 @@ export const removeOverflowHiddenFromBody = () => {
 export const addOverflowHiddenToBody = (paddingRight = '') => {
   const body = document.querySelector('body') as HTMLBodyElement
   body.classList.add('overflow-hidden')
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   paddingRight && (body.style.paddingRight = paddingRight)
 }
 

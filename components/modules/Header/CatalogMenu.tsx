@@ -29,7 +29,6 @@ const CatalogMenu = () => {
         2,
         catalogMenuTsOpen
     )
-    const isMedia640 = useMediaQuery(640)
     const isMedia450 = useMediaQuery(450)
 
     const handleShowClothList = () => {

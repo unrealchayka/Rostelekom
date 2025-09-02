@@ -1,3 +1,4 @@
+import { JSX } from 'react'
 import { IProduct } from './common'
 
 export interface IAccordionProps {

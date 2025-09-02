@@ -1,7 +1,7 @@
 'use client'
 import { AllowedLangs } from '@/constants/lang';
 import { setLang } from '@/context/lang';
-import { $menuIsopen, closeCatalogMenu, closeMenu } from '@/context/modals';
+import { $menuIsopen, closeMenu } from '@/context/modals';
 import { useLang } from '@/hooks/useLang';
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common';
 import { useUnit } from 'effector-react';
@@ -25,7 +25,6 @@ const Menu = () => {
     const pathname = usePathname()
 
     const isMedia800 = useMediaQuery(800)
-    const isMedia450 = useMediaQuery(450)
     const isMedia640 = useMediaQuery(640)
 
     const handleSwitchLangToRu = () => handleswitchLang('ru')
