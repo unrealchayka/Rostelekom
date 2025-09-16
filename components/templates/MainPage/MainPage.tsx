@@ -1,12 +1,17 @@
+'use client'
 import Categories from '@/components/modules/MainPage/Categories/Categories';
 import Hero from '@/components/modules/MainPage/Hero/Hero';
-import React from 'react';
+import BestsellerGoods from '@/components/modules/MainPage/BestsellerGoods';
+import { useGate } from 'effector-react';
+import { MainPageGate } from '@/context/goods';
 
 const MainPage = () => {
+    useGate(MainPageGate)
     return (
         <main>
-            <Hero/>
-            <Categories/>
+            <Hero />
+            <Categories />
+            <BestsellerGoods />
         </main>
     );
 }
