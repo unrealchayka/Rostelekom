@@ -15,9 +15,11 @@ import ProductLabel from './Productlabel';
 import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn';
 import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
 import { motion } from 'motion/react';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const ProductListItem = ({ item, title }: IProductsListItemProps) => {
     const { lang, translations } = useLang()
+    const isMedia800 = useMediaQuery(800)
     const isTitleForNew = title === translations[lang].main_page.new_title
 
     return (
@@ -87,10 +89,13 @@ const ProductListItem = ({ item, title }: IProductsListItemProps) => {
                         <ProductItemActionBtn
                             text={translations[lang].product.add_to_comparison}
                             iconClass='actions__btn_comparison'
-                        /><ProductItemActionBtn
+                        />
+                        {!isMedia800 && 
+                            <ProductItemActionBtn
                             text={translations[lang].product.quick_view}
                             iconClass='actions__btn_quick_view'
                         />
+                        }
                     </div>
                     <Link
                         href={`/catalog/${item.category}/${item._id}`}

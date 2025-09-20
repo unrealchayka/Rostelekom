@@ -13,6 +13,7 @@ export const removeOverflowHiddenFromBody = () => {
 export const addOverflowHiddenToBody = (paddingRight = '') => {
   const body = document.querySelector('body') as HTMLBodyElement
   body.classList.add('overflow-hidden')
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   paddingRight && (body.style.paddingRight = paddingRight)
 }
 
@@ -107,6 +108,7 @@ export const triggerLoginCheck = () => {
     return
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const auth = JSON.parse(localStorage.getItem('auth') as string)
 
 }
@@ -114,6 +116,7 @@ export const triggerLoginCheck = () => {
 export const isItemInList = (array: ICartItem[], productId: string) =>
   array.some((item) => item.productId === productId)
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const handleShowSizeTable = (product: IProduct) => {
   addOverflowHiddenToBody()
 }
@@ -130,8 +133,8 @@ export const deleteProductFromLS = <T>(
   key: string,
   event: EventCallable<T>,
   setShouldShowEmpty: (arg0: boolean) => void,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   message: string,
-  withToast = true
 ) => {
   let items = JSON.parse(localStorage.getItem(key) as string)
 
@@ -198,6 +201,7 @@ export const getCheckedArrayParam = (param: string) => {
     if (Array.isArray(sizesArr) && sizesArr.length) {
       return sizesArr
     }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return false
   }
@@ -230,6 +234,7 @@ export const addScriptToHead = (src: string) => {
 }
 
 export const isValidAvatarImage = (image: File) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const allowedExtension = /^image\/(png|jpe?g|gif|bmp|webp)$/
 
   if (!image) {
