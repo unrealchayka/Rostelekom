@@ -9,6 +9,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
+    addOverflowHiddenToBody,
     formatPrice,
 } from '@/lib/utils/common'
 import ProductLabel from './Productlabel';
@@ -16,12 +17,19 @@ import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/Pro
 import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
 import { motion } from 'motion/react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { setCurrentProduct } from '@/context/goods';
+import { showQuickViewModal } from '@/context/modals';
 
 const ProductListItem = ({ item, title }: IProductsListItemProps) => {
     const { lang, translations } = useLang()
     const isMedia800 = useMediaQuery(800)
     const isTitleForNew = title === translations[lang].main_page.new_title
 
+    const handleShowQuickViewModal = () => {
+        addOverflowHiddenToBody()
+        showQuickViewModal()
+        setCurrentProduct(item)
+    }
     return (
         <>
             {item.characteristics.collections === 'line' &&
@@ -90,18 +98,19 @@ const ProductListItem = ({ item, title }: IProductsListItemProps) => {
                             text={translations[lang].product.add_to_comparison}
                             iconClass='actions__btn_comparison'
                         />
-                        {!isMedia800 && 
+                        {!isMedia800 &&
                             <ProductItemActionBtn
-                            text={translations[lang].product.quick_view}
-                            iconClass='actions__btn_quick_view'
-                        />
+                                text={translations[lang].product.quick_view}
+                                iconClass='actions__btn_quick_view'
+                                callback={handleShowQuickViewModal}
+                            />
                         }
                     </div>
                     <Link
                         href={`/catalog/${item.category}/${item._id}`}
                         className={styles.list__item__img}
                     >
-                        <Image src={item.images[0]} alt={item.name} fill sizes='width: 100%'/>
+                        <Image src={item.images[0]} alt={item.name} fill sizes='width: 100%' />
                     </Link>
                     <div className={styles.list__item__inner}>
                         <h3 className={styles.list__item__title}>

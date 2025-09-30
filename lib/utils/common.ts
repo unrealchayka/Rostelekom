@@ -1,9 +1,11 @@
 import { EventCallable } from 'effector'
 import {
   closeSearchModal,
+  closeSizeTable,
 } from '@/context/modals'
 import { ICartItem } from '@/types/cart'
 import { IProduct } from '@/types/common'
+import { closeAuthPopup, openAuthPopup } from '@/context/auth'
 
 export const removeOverflowHiddenFromBody = () => {
   const body = document.querySelector('body') as HTMLBodyElement
@@ -48,38 +50,22 @@ export const shuffle = <T>(array: T[]) => {
 export const formatPrice = (x: number) =>
   x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
-export const idGenerator = () => {
-  const S4 = () =>
-    (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
-  return (
-    S4() +
-    S4() +
-    '-' +
-    S4() +
-    '-' +
-    S4() +
-    '-' +
-    S4() +
-    '-' +
-    S4() +
-    S4() +
-    S4()
-  )
-}
-
 export const closeSizeTableByCheck = (showQuickViewModal: boolean) => {
   if (!showQuickViewModal) {
     removeOverflowHiddenFromBody()
   }
 
+  closeSizeTable()
 }
 
 export const handleOpenAuthPopup = () => {
   addOverflowHiddenToBody()
+  openAuthPopup()
 }
 
 export const handleCloseAuthPopup = () => {
   removeOverflowHiddenFromBody()
+  closeAuthPopup()
 }
 
 export const closeAuthPopupWhenSomeModalOpened = (
@@ -244,4 +230,11 @@ export const isValidAvatarImage = (image: File) => {
  
 
   return true
+}
+
+export const idGenerator = () => {
+    const S4 = () =>
+        (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+    
+    return `${S4()}${S4()}_${S4()}_${S4()}_${S4()}_${S4()}${S4()}${S4()}${S4()}`
 }

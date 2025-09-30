@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
-import 'bootstrap/dist/css/bootstrap.css'
-import "./globalStyles/globals.css";
-import "./globalStyles/header.css";
-import "./globalStyles/menu.css";
-import Layout from "@/components/layouts/Layout";
+import './globalStyles/normalize.css'
+import './globalStyles/globals.css'
+import './globalStyles/header.css'
+import './globalStyles/menu.css'
+import './globalStyles/mobile-navbar.css'
+import './globalStyles/catalog-menu.css'
+import './globalStyles/search-modal.css'
+import './globalStyles/cart-popup.css'
+import './globalStyles/footer.css'
+import './globalStyles/slick-theme.css'
+import './globalStyles/slick.css'
+import './globalStyles/auth-popup.css'
+import './globalStyles/header-profile.css'
+import './globalStyles/cookie-popup.css'
+import './globalStyles/breadcrumbs.css'
+import './globalStyles/map.css'
+import PagesLayout from "@/components/layouts/PagesLayout";
 
 
-
-const rubik = Rubik({
-  variable: "--font-rubik",
-  subsets: ["latin"],
-  weight : ['300' , '500', '700', '900']
-});
 
 export const metadata: Metadata = {
   title: "Rostelecom",
@@ -25,10 +31,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={`${rubik.variable}`} style={{fontFamily: 'var(--font-rubik)'}}>
-        <Layout>{children}</Layout>
-      </body>
-    </html>
+    <PagesLayout>{children}</PagesLayout>
   );
 }
