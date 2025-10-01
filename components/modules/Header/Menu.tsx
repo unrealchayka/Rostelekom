@@ -1,7 +1,7 @@
 'use client'
 import { AllowedLangs } from '@/constants/lang';
 import { setLang } from '@/context/lang';
-import { $menuIsopen, closeMenu } from '@/context/modals';
+import { $menuIsOpen, closeMenu } from '@/context/modals';
 import { useLang } from '@/hooks/useLang';
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common';
 import { useUnit } from 'effector-react';
@@ -21,7 +21,7 @@ const Menu = () => {
     const [showBuyersList, setShowBuyersList] = useState(false);
     const [showContactsList, setShowContactsList] = useState(false);
     const { lang, translations } = useLang()
-    const menuIsopen = useUnit($menuIsopen)
+    const menuIsopen = useUnit($menuIsOpen)
     const pathname = usePathname()
 
     const isMedia800 = useMediaQuery(800)

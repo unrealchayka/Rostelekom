@@ -13,7 +13,7 @@ const AuthPopup = () => {
         setIsSignUpActive(!isSignUpActive)
     }
     return (
-        <div className='auth-popup'>
+        <div className='container auth-popup'>
             <div>
                 <div className='starsec' />
                 <div className='starthird' />

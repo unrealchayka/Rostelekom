@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useRef } from 'react';
 import Header from '../modules/Header/Header';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import MobileNavbar from '../modules/MobileNavbar/MobileNavbar';
@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useUnit } from 'effector-react';
 import { $searchModal, $showQuickViewModal, $showSizeTable } from '@/context/modals';
 import SearchModal from '../modules/Header/SearchModal';
-import { handleCloseSearchModal } from '@/lib/utils/common';
+import { handleCloseAuthPopup, handleCloseSearchModal } from '@/lib/utils/common';
 import Footer from '../modules/Footer/Footer';
 import QuickViewModal from '../modules/QuickViewModal/QuickViewModal';
 import SizeTable from '../modules/SizeTable/SizeTable';
@@ -22,6 +22,17 @@ const Layout = ({ children }: {
     const showSizeTable = useUnit($showSizeTable)
     const openAuthPopup = useUnit($openAuthPopup)
     const showQuickViewModal = useUnit($showQuickViewModal)
+    const authWrapperRef = useRef<HTMLDivElement>(null)
+
+    const handleCloseAuthPopupByTarget = (
+        e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+        const target = e.target as Element
+
+        if (target === authWrapperRef.current) {
+            handleCloseAuthPopup()
+        }
+    }
 
     return (
         <>
@@ -36,6 +47,8 @@ const Layout = ({ children }: {
                         transition={{ duration: 0.3 }}
                         exit={{ opacity: 0, scale: 0.5 }}
                         className='auth-popup-wrapper'
+                        onClick={handleCloseAuthPopupByTarget}
+                        ref={authWrapperRef}
                     >
                         <AuthPopup />
                     </motion.div>
@@ -47,7 +60,6 @@ const Layout = ({ children }: {
                         exit={{ opacity: 0 }}
                     >
                         <SearchModal />
-                        <QuickViewModal />
                     </motion.div>
                 )}
                 {showSizeTable && (
