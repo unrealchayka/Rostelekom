@@ -4,6 +4,24 @@ import { createEffect } from "effector"
 import api from './apiInstance'
 import toast from "react-hot-toast"
 
+export const oauthFx = createEffect(
+    async ({ name, password, email }: ISignUpFx) => {
+        try {
+            const { data } = await api.post('/api/users/oauth', {
+                name,
+                password,
+                email,
+            })
+            
+            onAuthSuccess('АВТОРИЗАЦИЯ ВЫПОЛНЕНА', data)
+            return data.user
+        } catch (error) {
+            toast.error((error as Error).message)
+            return { error: true, message: (error as Error).message }
+        }
+    }
+)
+
 export const signUpFx = createEffect(
     async ({ name, password, email }: ISignUpFx) => {
         const { data } = await api.post('/api/users/signup', {

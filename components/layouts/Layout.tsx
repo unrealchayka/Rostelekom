@@ -13,6 +13,7 @@ import QuickViewModal from '../modules/QuickViewModal/QuickViewModal';
 import SizeTable from '../modules/SizeTable/SizeTable';
 import { $openAuthPopup } from '@/context/auth';
 import AuthPopup from '../modules/AuthPopup/AuthPopup';
+import { useSession } from 'next-auth/react';
 
 const Layout = ({ children }: {
     children: React.ReactNode
@@ -23,6 +24,8 @@ const Layout = ({ children }: {
     const openAuthPopup = useUnit($openAuthPopup)
     const showQuickViewModal = useUnit($showQuickViewModal)
     const authWrapperRef = useRef<HTMLDivElement>(null)
+    const session = useSession()
+    console.log(session)
 
     const handleCloseAuthPopupByTarget = (
         e: React.MouseEvent<HTMLDivElement, MouseEvent>

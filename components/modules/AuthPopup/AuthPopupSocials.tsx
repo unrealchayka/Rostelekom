@@ -1,3 +1,4 @@
+'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faGithub,
@@ -5,6 +6,7 @@ import {
   faVk,
   faYandex,
 } from '@fortawesome/free-brands-svg-icons'
+import { signIn } from 'next-auth/react'
 
 const AuthPopupSocials = ({
   handleSignupWithOAuth,
@@ -20,7 +22,7 @@ const AuthPopupSocials = ({
     </button>
     <button
       className='btn-reset socials__btn g-color'
-      onClick={handleSignupWithOAuth}
+      onClick={() => {signIn('google', {callbackUrl: '/'})}}
     >
       <FontAwesomeIcon icon={faGoogle} shake />
     </button>
