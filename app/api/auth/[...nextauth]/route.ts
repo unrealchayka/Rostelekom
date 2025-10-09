@@ -1,4 +1,3 @@
-import { authConfig } from '@/configs/auth';
 import NextAuth from 'next-auth'
 
 import { AuthOptions } from 'next-auth'
