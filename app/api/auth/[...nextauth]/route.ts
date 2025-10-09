@@ -11,7 +11,7 @@ const authConfig = {
     }),
   ],
 
-}
+} 
 
 const handler = NextAuth(authConfig)
 
