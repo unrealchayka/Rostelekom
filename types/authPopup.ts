@@ -13,6 +13,7 @@ export interface ISignUpFx {
   name?: string
 }
 
+
 export interface IAuthSideProps {
   toggleAuth: VoidFunction
   isSideActive: boolean
