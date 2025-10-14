@@ -2,7 +2,7 @@ import { useUnit } from 'effector-react'
 import MainPageSection from './MainPageSection'
 import { useLang } from '@/hooks/useLang'
 import { $newProducts } from '@/context/goods'
-import { getNewProductsFx } from '@/api/main-page'
+import { getNewProductsFx } from '@/myapi/main-page'
 
 const NewGoods = () => {
   const goods = useUnit($newProducts)

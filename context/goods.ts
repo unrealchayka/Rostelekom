@@ -1,6 +1,6 @@
 'use client'
-import { loadOneProductFx } from "@/api/goods";
-import { getBestsellerProductsFx, getNewProductsFx } from "@/api/main-page";
+import { loadOneProductFx } from "@/myapi/goods";
+import { getBestsellerProductsFx, getNewProductsFx } from "@/myapi/main-page";
 import { IProduct } from "@/types/common";
 import { ILoadOneProductFx } from "@/types/goods";
 import { createDomain, Effect, sample } from "effector";

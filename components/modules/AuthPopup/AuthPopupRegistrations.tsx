@@ -5,7 +5,7 @@ import AuthPopupClose from "./AuthPopupClose";
 import { IAuthSideProps, IInputs } from "@/types/authPopup";
 import { useAuthForm } from "@/hooks/useAuthForm";
 import { handleSignUp } from "@/context/auth";
-import { signUpFx } from '@/api/my-auth'
+import { signUpFx } from '@/myapi/my-auth'
 import NameInput from "./NameInput";
 import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
