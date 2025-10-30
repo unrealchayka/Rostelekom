@@ -12,7 +12,7 @@ export const handleSignIn = auth.createEvent<ISignUpFx>()
 export const setIsAuth = auth.createEvent<boolean>()
 
 export const $openAuthPopup = auth
-    .createStore<boolean>(false)
+    .createStore<boolean>(false, {skipVoid: false})
     .on(openAuthPopup, () => true)
     .on(closeAuthPopup, () => false)
 
@@ -21,7 +21,7 @@ export const $isAuth = auth
     .on(setIsAuth, (_, isAuth) => isAuth)
 
 export const $auth = auth
-    .createStore({})
+    .createStore({},  {skipVoid: false})
     .on(signUpFx.done, (_, { result }) => result)
     .on(signUpFx.fail, (_, { error }) => {
         toast.error(error.message)

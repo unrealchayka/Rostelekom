@@ -110,7 +110,7 @@ const ProductListItem = ({ item, title }: IProductsListItemProps) => {
                         href={`/catalog/${item.category}/${item._id}`}
                         className={styles.list__item__img}
                     >
-                        <Image src={item.images[0]} alt={item.name} fill sizes='width: 100%' />
+                        <Image src={item.images[0]} alt={item.name} width={332} height={332} style={{width: '100%', height: 'auto'}} />
                     </Link>
                     <div className={styles.list__item__inner}>
                         <h3 className={styles.list__item__title}>

@@ -9,9 +9,16 @@ import Menu from "./Menu";
 import { openMenu, openSearchModal } from "@/context/modals";
 import { addOverflowHiddenToBody, handleOpenAuthPopup } from "@/lib/utils/common";
 import CartPopup from "./CartPopup/CartPopup";
+import HeaderProfile from "./HeaderProfile";
+import { useUnit } from "effector-react";
+import { $isAuth } from "@/context/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 
 export const Header = ({ }) => {
+    const isAuth = useUnit($isAuth)
+    const loginCheckSpinner = false
     const { lang, translations } = useLang()
 
     const handleOpenMenu = () => {
@@ -51,10 +58,16 @@ export const Header = ({ }) => {
                         <CartPopup />
                     </li>
                     <li className="header__links__item list-reset">
-                        <button
-                            className='btn-reset  header__links__item__btn header__links__item__btn--profile'
-                            onClick={handleOpenAuthPopup}
-                        />
+                        {isAuth ? (
+                            <HeaderProfile />
+                        ) : loginCheckSpinner ? (
+                            <FontAwesomeIcon icon={faSpinner} spin />
+                        ) : (
+                            <button
+                                className='btn-reset header__links__item__btn header__links__item__btn--profile'
+                                onClick={handleOpenAuthPopup}
+                            />
+                        )}
                     </li>
                 </ul>
 

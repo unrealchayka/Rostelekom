@@ -9,14 +9,11 @@ import {
 import { signIn } from 'next-auth/react'
 
 const AuthPopupSocials = ({
-  handleSignupWithOAuth,
-}: {
-  handleSignupWithOAuth: VoidFunction
 }) => (
   <div className='cart-body__socials'>
     <button
       className='btn-reset socials__btn gh-color'
-      onClick={handleSignupWithOAuth}
+      onClick={() => {signIn('google', {callbackUrl: '/'})}}
     >
       <FontAwesomeIcon icon={faGithub} beat />
     </button>
@@ -28,13 +25,13 @@ const AuthPopupSocials = ({
     </button>
     <button
       className='btn-reset socials__btn y-color'
-      onClick={handleSignupWithOAuth}
+      onClick={() => {signIn('google', {callbackUrl: '/'})}}
     >
       <FontAwesomeIcon icon={faYandex} bounce />
     </button>
     <button
       className='btn-reset socials__btn vk-color'
-      onClick={handleSignupWithOAuth}
+      onClick={() => {signIn('google', {callbackUrl: '/'})}}
     >
       <FontAwesomeIcon icon={faVk} shake />
     </button>
