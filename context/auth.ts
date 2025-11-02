@@ -12,7 +12,7 @@ export const handleSignIn = auth.createEvent<ISignUpFx>()
 export const setIsAuth = auth.createEvent<boolean>()
 
 export const $openAuthPopup = auth
-    .createStore<boolean>(false, {skipVoid: false})
+    .createStore<boolean>(false)
     .on(openAuthPopup, () => true)
     .on(closeAuthPopup, () => false)
 

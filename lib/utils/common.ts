@@ -6,6 +6,7 @@ import {
 import { ICartItem } from '@/types/cart'
 import { IProduct } from '@/types/common'
 import { closeAuthPopup, openAuthPopup } from '@/context/auth'
+import { loginCheck } from '@/context/user'
 
 export const removeOverflowHiddenFromBody = () => {
   const body = document.querySelector('body') as HTMLBodyElement
@@ -97,6 +98,7 @@ export const triggerLoginCheck = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const auth = JSON.parse(localStorage.getItem('auth') as string)
 
+  loginCheck({jwt: auth.accessToken})
 }
 
 export const isItemInList = (array: ICartItem[], productId: string) =>

@@ -1,29 +1,23 @@
-import { useUnit } from 'effector-react'
 import { useState, useEffect } from 'react'
-import { $user } from '@/context/user'
+import { useSession } from 'next-auth/react'
 
 export const useUserAvatar = () => {
-  const user = useUnit($user)
+  const user = useSession().data?.user
   const [src, setSrc] = useState('')
-
   useEffect(() => {
-    if (user.image) {
-      setSrc(user.image)
+    if (user?.image) {
+      setSrc(user?.image)
       return
     }
 
-    const oauthAvatar = JSON.parse(
-      localStorage.getItem(
-        '@@oneclientjs@@::l3Q4jO58IChQRwUkzkHI::@@user@@'
-      ) as string
-    )
+    const oauthAvatar = user?.image as string
 
     if (!oauthAvatar) {
       return
     }
 
-    setSrc(oauthAvatar.decodedToken.user.photoURL)
-  }, [user.image])
+    setSrc(oauthAvatar)
+  }, [user?.image])
 
-  return { src, alt: user.name }
+  return { src, alt: user?.name }
 }

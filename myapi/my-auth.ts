@@ -3,6 +3,9 @@ import { ISignUpFx } from "@/types/authPopup"
 import { createEffect } from "effector"
 import api from './apiInstance'
 import toast from "react-hot-toast"
+import { setIsAuth } from "@/context/auth"
+import { handleJWTError } from "@/lib/utils/errors"
+import { ILoginCheckFx } from "@/types/user"
 
 export const oauthFx = createEffect(
     async ({ name, password, email }: ISignUpFx) => {
@@ -73,4 +76,25 @@ export const signInFx = createEffect(async ({ email, password, isOAuth }: ISignU
     onAuthSuccess('ВХОД ВЫПОЛНЕН!', data)
 
     return data
+})
+
+export const loginCheckFx = createEffect(async ({ jwt }: ILoginCheckFx) => {
+  try {
+    const { data } = await api.get('/api/users/login-check', {
+      headers: { Authorization: `Bearer ${jwt}` },
+    })
+
+    if (data?.error) {
+      handleJWTError(data.error.name, {
+        repeatRequestMethodName: 'loginCheckFx',
+        payload: ''
+      })
+      return
+    }
+
+    setIsAuth(true)
+    return data.user
+  } catch (error) {
+    toast.error((error as Error).message)
+  }
 })

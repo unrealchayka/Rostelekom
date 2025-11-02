@@ -7,19 +7,24 @@ import Link from "next/link";
 import '@/app/globalStyles/header.css'
 import Menu from "./Menu";
 import { openMenu, openSearchModal } from "@/context/modals";
-import { addOverflowHiddenToBody, handleOpenAuthPopup } from "@/lib/utils/common";
+import { addOverflowHiddenToBody, handleOpenAuthPopup, triggerLoginCheck } from "@/lib/utils/common";
 import CartPopup from "./CartPopup/CartPopup";
 import HeaderProfile from "./HeaderProfile";
 import { useUnit } from "effector-react";
 import { $isAuth } from "@/context/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { loginCheckFx } from "@/myapi/my-auth";
+import { useEffect, useState } from "react";
+import { $user } from "@/context/user";
+import { useSession } from "next-auth/react";
 
 
 export const Header = ({ }) => {
-    const isAuth = useUnit($isAuth)
-    const loginCheckSpinner = false
+    const loginCheckSpinner = useUnit(loginCheckFx.pending)
     const { lang, translations } = useLang()
+    const sessions = useSession()
+
 
     const handleOpenMenu = () => {
         addOverflowHiddenToBody()
@@ -30,6 +35,10 @@ export const Header = ({ }) => {
         openSearchModal()
         addOverflowHiddenToBody()
     }
+
+    useEffect(() => {
+       triggerLoginCheck()
+    }, [])
     return (
         <header className="header">
 
@@ -58,10 +67,10 @@ export const Header = ({ }) => {
                         <CartPopup />
                     </li>
                     <li className="header__links__item list-reset">
-                        {isAuth ? (
-                            <HeaderProfile />
-                        ) : loginCheckSpinner ? (
+                        {sessions.status === 'loading' ? (
                             <FontAwesomeIcon icon={faSpinner} spin />
+                        ) : sessions.status === 'authenticated'  ? (
+                            <HeaderProfile />
                         ) : (
                             <button
                                 className='btn-reset header__links__item__btn header__links__item__btn--profile'

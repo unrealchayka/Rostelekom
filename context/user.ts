@@ -1,6 +1,20 @@
-import { createDomain } from 'effector'
-import { IUser } from '@/types/user'
+import { createDomain, sample } from 'effector'
+import { ILoginCheckFx, IUser } from '@/types/user'
+import { loginCheckFx } from '@/myapi/my-auth'
 
-const user = createDomain()
+export const user = createDomain()
 
-export const $user = user.createStore<IUser>({} as IUser)
+export const loginCheck = user.createEvent<ILoginCheckFx>()
+
+export const $user = user
+  .createStore<IUser>({} as IUser)
+  .on(loginCheckFx.done, (_, { result }) => result)
+
+sample({
+  clock: loginCheck,
+  source: $user,
+  fn: (_, { jwt }) => ({
+    jwt,
+  }),
+  target: loginCheckFx,
+})
